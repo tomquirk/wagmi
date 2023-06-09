@@ -10,12 +10,13 @@ const packagePaths = await glob('**/package.json', {
 
 let count = 0
 for (const packagePath of packagePaths) {
-  type Package = {
-    name?: string
-    private?: boolean
-    version?: string
-  }
-  const packageFile = (await fs.readJson(packagePath)) as Package
+  /**
+   * @typedef {object} Package
+   * @property {string=} [name]
+   * @property {boolean=} [private]
+   * @property {string=} [version]
+   */
+  const packageFile = /** @type {Package} */ (await fs.readJson(packagePath))
 
   // Skip private packages
   if (packageFile.private) continue
@@ -26,7 +27,7 @@ for (const packagePath of packagePaths) {
   const versionFilePath = path.resolve(
     path.dirname(packagePath),
     'src',
-    'version.ts',
+    'version.js',
   )
   await fs.writeFile(
     versionFilePath,

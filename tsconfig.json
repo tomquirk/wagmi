@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": ["**/scripts", "**/vitest.workspace.ts", "vitest.config.ts"],
+  "include": ["scripts", "vitest.config.js", "vitest.workspace.js"],
   "exclude": [],
   "compilerOptions": {
     "strict": true,
